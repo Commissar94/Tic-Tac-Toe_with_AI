@@ -73,6 +73,11 @@ public class Main {
             System.out.println("Draw");
             return true;
         }
+        if (rules.checkWinX(grid)) {
+            System.out.println("X wins");
+        } else if (rules.checkWinO(grid)) {
+            System.out.println("O wins");
+        }
         return rules.checkWinX(grid) || rules.checkWinO(grid);
     }
 }
