@@ -1,8 +1,8 @@
-package tictactoe;
+package tictactoe.players;
+
+import tictactoe.Grid;
 
 public class HumanPlayer extends Player {
-
-    private boolean isHePlayingForX;
 
     public HumanPlayer(boolean isHePlayingForX) {
         this.isHePlayingForX = isHePlayingForX;

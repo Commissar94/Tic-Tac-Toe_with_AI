@@ -1,19 +1,23 @@
-package tictactoe;
+package tictactoe.players.ai;
+
+import tictactoe.Grid;
 
 import java.util.Random;
 
-public class AiPlayer extends Player {
+public class EasyAiPlayer extends AiPlayer {
 
-    private boolean isHePlayingForX;
+    public EasyAiPlayer(boolean isHePlayingForX) {
+        super(isHePlayingForX);
+    }
 
-    public AiPlayer(boolean isHePlayingForX) {
-        this.isHePlayingForX = isHePlayingForX;
+    @Override
+    public void makeMoveNotify() {
+        System.out.println("Making move level \"easy\"");
     }
 
     public void aiEasyMove(Grid ourGrid) {
         char[][] grid = ourGrid.getGrid();
 
-        System.out.println("Making move level \"easy\"");
         Random random = new Random();
         int x = random.nextInt(3) + 1;
         int y = random.nextInt(3) + 1;
@@ -41,6 +45,6 @@ public class AiPlayer extends Player {
                 }
             }
         }
-
     }
+
 }
