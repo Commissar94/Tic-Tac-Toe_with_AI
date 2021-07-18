@@ -1,12 +1,13 @@
 package tictactoe;
 
-import tictactoe.players.ai.AiPlayer;
 import tictactoe.players.HumanPlayer;
 import tictactoe.players.Player;
 import tictactoe.players.ai.EasyAiPlayer;
+import tictactoe.players.ai.HardAiPlayer;
 import tictactoe.players.ai.MediumAiPlayer;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,34 +27,46 @@ public class Main {
             Проверяем правильность введения команды
             И ловим неправильные вводы
              */
-            try {
-                if (players.get(0).equals("user") || players.get(0).equals("easy") || players.get(0).equals("medium") &&
-                        players.get(1).equals("easy") || players.get(1).equals("user") || players.get(0).equals("medium")) {
+           try {
+                if (players.get(0).equals("user") ||
+                        players.get(0).equals("easy") || players.get(0).equals("medium") || players.get(0).equals("hard") &&
+                        players.get(1).equals("user") ||
+                        players.get(1).equals("easy") || players.get(1).equals("medium") || players.get(1).equals("hard")) {
                     Player player1;
                     Player player2;
                 /*
                 Определяем кем будут являться игроки и их очередность хода
                  */
-                    //переместить это в геймМод, установим игроков там
+                    //TODO перенести в GameMode
                     //первый игрок
-                    if (players.get(0).equals("user")) {
-                        player1 = new HumanPlayer(true);
-                    } else if (players.get(0).equals("easy")) {
-                        player1 = new EasyAiPlayer(true);
-                    } else if (players.get(0).equals("medium")) {
-                        player1 = new MediumAiPlayer(true);
-                    } else {
-                        player1 = new EasyAiPlayer(true);
+                    switch (players.get(0)) {
+                        case "user":
+                            player1 = new HumanPlayer(true);
+                            break;
+                        case "easy":
+                            player1 = new EasyAiPlayer(true);
+                            break;
+                        case "medium":
+                            player1 = new MediumAiPlayer(true);
+                            break;
+                        default:
+                            player1 = new HardAiPlayer(true); //hard
+                            break;
                     }
                     //второй игрок
-                    if (players.get(1).equals("user")) {
-                        player2 = new HumanPlayer(false);
-                    } else if (players.get(1).equals("easy")) {
-                        player2 = new EasyAiPlayer(false);
-                    } else if (players.get(1).equals("medium")) {
-                        player2 = new MediumAiPlayer(false);
-                    } else {
-                        player2 = new EasyAiPlayer(true);
+                    switch (players.get(1)) {
+                        case "user":
+                            player2 = new HumanPlayer(false);
+                            break;
+                        case "easy":
+                            player2 = new EasyAiPlayer(false);
+                            break;
+                        case "medium":
+                            player2 = new MediumAiPlayer(false);
+                            break;
+                        default:
+                            player2 = new HardAiPlayer(false); //hard
+                            break;
                     }
                     Grid grid = new Grid(); // создаем сетку, попутно вызывая генерацию пустых полей и последующий вывод в консоль
 
@@ -80,6 +93,7 @@ public class Main {
         }
     }
 
+    //TODO Поправить и перенести в абстрактного игрока через его интерфейс
     private static boolean playerMove(Scanner scanner, Rules rules, Player player, Grid grid) {
         if (player instanceof HumanPlayer) {
             System.out.print("Enter the coordinates:");
@@ -90,6 +104,9 @@ public class Main {
         } else if (player instanceof MediumAiPlayer) {
             ((MediumAiPlayer) player).makeMoveNotify();
             ((MediumAiPlayer) player).aiMediumMove(grid);
+        } else if (player instanceof  HardAiPlayer) {
+            ((HardAiPlayer) player).makeMoveNotify();
+            ((HardAiPlayer) player).aiHardMove(grid);
         }
 
 

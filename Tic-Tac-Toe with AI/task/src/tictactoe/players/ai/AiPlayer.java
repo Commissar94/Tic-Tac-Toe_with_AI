@@ -12,14 +12,13 @@ public class AiPlayer extends Player {
         this.isHePlayingForX = isHePlayingForX;
     }
 
-    public void makeMoveNotify(){
+    public void makeMoveNotify() {
 
     }
 
     public List<Character> oneMoveForWinCheck(Grid ourGrid, Character whoIsOneMoveForWin) {
         char[][] grid = ourGrid.getGrid();
-//        int fieldsOfXorO = 0;
-//        int emptyFields = 0;
+
         List<Character> winMove = new ArrayList<>(); // sout []
         for (int i = 0; i < 3; i++) {
             //проверяем на ситуацию предшествующую победе по горизонталям
@@ -75,4 +74,11 @@ public class AiPlayer extends Player {
         }
         return winMove;
     }
+
+
+
+
+
+
+
 }
